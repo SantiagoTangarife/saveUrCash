@@ -3,13 +3,14 @@ package co.edu.udea.analisis.saveUr
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
-
 import java.io.*
+import java.text.NumberFormat
 import kotlin.math.abs
+import co.edu.udea.analisis.saveUr.Estado
 
 
 //package co.edu.udea.analisis.saveUr.data
@@ -31,12 +32,17 @@ class HomeActivity : AppCompatActivity() {
         val Factura:Button=findViewById(R.id.Facturas)
         val Prestamos:Button=findViewById(R.id.Prestamos)
 
+        val formatoNumero: NumberFormat = NumberFormat.getNumberInstance()
 
         val money=GenerarInfo()
         val registrosInEg=Dinero().RegistroMes(money)
-        barra(registrosInEg)
-        gastado.text = "$${abs(registrosInEg[1])}"
-        total.text = "$${registrosInEg[0]}"
+        val estado=object :Estado(){}.barra(registrosInEg,findViewById(R.id.progressBar2),CargarDbAh())
+        estado.color(findViewById(R.id.progressBar2))
+
+        //barra(registrosInEg)
+
+        gastado.text = "$${formatoNumero.format(abs(registrosInEg[1]))}"
+        total.text = "$${formatoNumero.format(registrosInEg[0])}"
 
         Info.setOnClickListener{
             InfoG()
@@ -128,42 +134,6 @@ class HomeActivity : AppCompatActivity() {
         return money
      }
 
-    fun barra(InEg: ArrayList<Float>) {
-        val cuota=CargarDbAh()
-
-        progressBar2.max= InEg[0].toInt()
-        val currentProgress=abs(InEg[1].toInt())+(cuota[0].toFloat()/cuota[1].toInt()).toInt()
-        ObjectAnimator.ofInt(progressBar2,"progress",currentProgress).setDuration(1).start()
-        val In=InEg[0]
-        val Eg=abs(InEg[1])+1+(cuota[0].toFloat()/cuota[1].toInt())
-
-        color(Eg/In)
-
-    }
-
-    fun color(porcen:Float) {
-
-        val tinte:ProgressBar=findViewById(R.id.progressBar2)
-        println(porcen)
-        if(porcen<0.35){
-
-            tinte.progressDrawable.setColorFilter(Color.GREEN,android.graphics.PorterDuff.Mode.SRC_IN)
-        }
-        else if(porcen>0.36){
-
-            tinte.progressDrawable.setColorFilter(Color.BLUE,android.graphics.PorterDuff.Mode.SRC_IN)
-        }
-        else if(porcen>0.55){
-
-            tinte.progressDrawable.setColorFilter(Color.YELLOW,android.graphics.PorterDuff.Mode.SRC_IN)
-        }
-        else if(porcen>0.80){
-
-            tinte.progressDrawable.setColorFilter(Color.RED,android.graphics.PorterDuff.Mode.SRC_IN)
-        }
-
-    }
-
     fun CargarDbAh() : List<String> {
         var texto = ""
         try {
@@ -186,7 +156,31 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
+   /* fun color(porcen:Float) {
+        val tinte:ProgressBar=findViewById(R.id.progressBar2)
+        println(porcen)
+        if(porcen<0.35){
+            tinte.progressDrawable.setColorFilter(Color.GREEN,android.graphics.PorterDuff.Mode.SRC_IN)
+        }
+
+        else if(porcen>0.80){
+            tinte.progressDrawable.setColorFilter(Color.RED,android.graphics.PorterDuff.Mode.SRC_IN)
+        }
+        else if(porcen>0.55){
+            tinte.progressDrawable.setColorFilter(Color.YELLOW,android.graphics.PorterDuff.Mode.SRC_IN)
+        }
+        else if(porcen>0.35){
+            tinte.progressDrawable.setColorFilter(Color.BLUE,android.graphics.PorterDuff.Mode.SRC_IN)
+        }
+
+    }   */
+
+
+
+
 }
+
+
 
 
 
