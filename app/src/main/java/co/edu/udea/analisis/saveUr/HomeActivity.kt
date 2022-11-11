@@ -23,6 +23,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        val Usuario=findViewById<TextView>(R.id.SaludoBienvenida)
         val gastado = findViewById<TextView>(R.id.textView4)
         val total = findViewById<TextView>(R.id.textView5)
         val Info:LinearLayout=findViewById(R.id.InfoG)
@@ -33,16 +34,15 @@ class HomeActivity : AppCompatActivity() {
         val Prestamos:Button=findViewById(R.id.Prestamos)
 
         val formatoNumero: NumberFormat = NumberFormat.getNumberInstance()
-
         val money=GenerarInfo()
         val registrosInEg=Dinero().RegistroMes(money)
         val estado=object :Estado(){}.barra(registrosInEg,findViewById(R.id.progressBar2),CargarDbAh())
         estado.color(findViewById(R.id.progressBar2))
-
-        //barra(registrosInEg)
-
         gastado.text = "$${formatoNumero.format(abs(registrosInEg[1]))}"
         total.text = "$${formatoNumero.format(registrosInEg[0])}"
+        //Usuario.text="Bienbenido \n  ${Usuario().getUser()}"
+
+
 
         Info.setOnClickListener{
             InfoG()
@@ -64,9 +64,6 @@ class HomeActivity : AppCompatActivity() {
             val intent: Intent = Intent(this,PrestamosActivity::class.java)
             startActivity(intent)
         }
-
-
-
     }
 
     fun Ingreso() {           //funcion OnClickIngresos
@@ -81,8 +78,6 @@ class HomeActivity : AppCompatActivity() {
         val intent: Intent = Intent(this,EgresosActivity::class.java)
         startActivity(intent)
     }
-
-
     fun Guardar(texto: String) {//texto= carne;30/07/22;-23000
         try {
             val rutaSD = baseContext.getExternalFilesDir(null)?.absolutePath
@@ -101,7 +96,6 @@ class HomeActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG).show()
         }
     }
-
     fun Cargar() : String {
         var texto = ""
         try {
@@ -120,8 +114,6 @@ class HomeActivity : AppCompatActivity() {
         return texto
 
     }
-
-
     fun GenerarInfo(): ArrayList<String> {
          val a=Cargar()
          val money= arrayListOf<String>()
@@ -133,7 +125,6 @@ class HomeActivity : AppCompatActivity() {
          }
         return money
      }
-
     fun CargarDbAh() : List<String> {
         var texto = ""
         try {
@@ -155,7 +146,6 @@ class HomeActivity : AppCompatActivity() {
         return t[p].split(",")
 
     }
-
    /* fun color(porcen:Float) {
         val tinte:ProgressBar=findViewById(R.id.progressBar2)
         println(porcen)

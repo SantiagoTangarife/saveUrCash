@@ -15,11 +15,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val buttonII:Button=findViewById(R.id.button)
-        buttonII.setOnClickListener{
-            onClick()
-        }
-
         val buttonI: Button = findViewById(R.id.google)
         buttonI.setOnClickListener {
             google()
@@ -27,11 +22,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-     fun onClick() {
-        val cambio: Intent = Intent(this,HomeActivity::class.java)
-        startActivity(cambio)
-
-    }
     fun google(){
         val intent: Intent = Intent(this,AhorroProgramadoActivity::class.java)
         startActivity(intent)

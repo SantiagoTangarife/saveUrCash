@@ -58,8 +58,6 @@ class ProgresoActivity : AppCompatActivity() {
         val line=a.split("\n")
         for(i in line){
             if(i!=""){
-
-
                 val t=i.split(";")
                 //println(t)   //0=titulo, 1 =Fecha; 2=Valor
                 val elemento:Elemento;
@@ -68,9 +66,7 @@ class ProgresoActivity : AppCompatActivity() {
                 }
                 else{
                      elemento=Elemento(t[0],t[2].toFloat(),R.drawable.egreso, t[1])
-
                 }
-
                 money.add(elemento)}
         }
         return money

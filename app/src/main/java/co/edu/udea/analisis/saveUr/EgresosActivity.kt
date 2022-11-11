@@ -19,7 +19,6 @@ class EgresosActivity : AppCompatActivity() {
         setContentView(R.layout.activity_egresos)
         val buttonE: ImageButton = findViewById(R.id.backToHomeE)
         val buttonSave: Button = findViewById(R.id.SaveEgreso)
-
         buttonE.setOnClickListener {
             backHome()
         }
@@ -37,9 +36,7 @@ class EgresosActivity : AppCompatActivity() {
             Guardar(outString)
             backHome()
         }
-
     }
-
     fun backHome(){
         val intent: Intent = Intent(this,HomeActivity::class.java)
         startActivity(intent)
