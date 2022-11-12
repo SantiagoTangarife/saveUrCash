@@ -82,7 +82,13 @@ class AhorroProgramadoActivity : AppCompatActivity() {
         val t=texto.split("\n")
         val p=(t.size)-2
         //println(t[p].split(","))
-        return t[p].split(",")
+        try {
+            return t[p].split(",")
+        }
+        catch (e: Exception){
+            var list= listOf<String>("0","1")
+            return list
+        }
 
     }
 

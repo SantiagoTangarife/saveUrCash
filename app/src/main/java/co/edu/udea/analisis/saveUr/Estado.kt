@@ -10,9 +10,10 @@ import java.io.FileInputStream
 import java.io.InputStreamReader
 import kotlin.math.abs
 
-abstract class Estado() {
+abstract class Estado(context: HomeActivity): IEstado {
+    protected open val contexto: HomeActivity = context
 
-    fun barra(InEg: ArrayList<Float>,progressBar2: ProgressBar,CargarDbAh:List<String>): Estado {
+    override fun balance(InEg: ArrayList<Float>, progressBar2: ProgressBar, CargarDbAh:List<String>) {
         val cuota=CargarDbAh
         progressBar2.max= InEg[0].toInt()
         val currentProgress= abs(InEg[1].toInt()) +(cuota[0].toFloat()/cuota[1].toInt()).toInt()
@@ -21,26 +22,19 @@ abstract class Estado() {
         val Eg= abs(InEg[1]) +1+(cuota[0].toFloat()/cuota[1].toInt())
         //color(Eg/In)
         //color(progressBar2)
-        var estado:Estado=Normal()
         if((Eg/In)<0.35){
-            estado=Normal()        }
-
+            contexto.CambiarEstado(contexto.estadoNormal)     }
         else if((Eg/In)>0.80){
-            estado=Critico()        }
+            contexto.CambiarEstado(contexto.estadocritico)     }
         else if((Eg/In)>0.55){
-            estado=Grave()        }
+            contexto.CambiarEstado(contexto.estadoGrave)         }
         else if((Eg/In)>0.35){
-            estado=Aceptable()  }
-
-
-        return  estado
+            contexto.CambiarEstado(contexto.estadoAceptable)   }
 
     }
 
 
-   open fun color(ProgressBar2:ProgressBar) {
-       ProgressBar2.progressDrawable.setColorFilter(Color.GREEN,android.graphics.PorterDuff.Mode.SRC_IN)
-    }
+   abstract override fun color(ProgressBar2:ProgressBar)
 
 
 

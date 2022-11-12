@@ -11,21 +11,27 @@ import java.io.*
 import java.text.NumberFormat
 import kotlin.math.abs
 import co.edu.udea.analisis.saveUr.Estado
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.item_factura.view.*
 
 
 //package co.edu.udea.analisis.saveUr.data
 
 class HomeActivity : AppCompatActivity() {
 
-
+    private lateinit var auth : FirebaseAuth
+    var estadoNormal: IEstado = Normal(this)
+    var estadoAceptable: IEstado = Aceptable(this)
+    var estadoGrave: IEstado = Grave(this)
+    var estadocritico: IEstado = Critico(this)
+    var state: IEstado = estadoNormal
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        val Usuario=findViewById<TextView>(R.id.SaludoBienvenida)
-        val gastado = findViewById<TextView>(R.id.textView4)
-        val total = findViewById<TextView>(R.id.textView5)
+        val gastado = findViewById<TextView>(R.id.textView5)
+        val total = findViewById<TextView>(R.id.textView4)
         val Info:LinearLayout=findViewById(R.id.InfoG)
         val buttonI: Button = findViewById(R.id.Ingresos)
         val buttonE:Button=findViewById(R.id.Egresos)
@@ -36,12 +42,19 @@ class HomeActivity : AppCompatActivity() {
         val formatoNumero: NumberFormat = NumberFormat.getNumberInstance()
         val money=GenerarInfo()
         val registrosInEg=Dinero().RegistroMes(money)
-        val estado=object :Estado(){}.barra(registrosInEg,findViewById(R.id.progressBar2),CargarDbAh())
-        estado.color(findViewById(R.id.progressBar2))
+        state.balance(registrosInEg,findViewById(R.id.progressBar2),CargarDbAh())
+        state.color(findViewById(R.id.progressBar2))
         gastado.text = "$${formatoNumero.format(abs(registrosInEg[1]))}"
         total.text = "$${formatoNumero.format(registrosInEg[0])}"
-        //Usuario.text="Bienbenido \n  ${Usuario().getUser()}"
+        auth = FirebaseAuth.getInstance()
 
+
+        findViewById<Button>(R.id.logout).setOnClickListener{
+            auth.signOut()
+            finishAffinity()
+        }
+
+        findViewById<TextView>(R.id.SaludoBienvenida).text = intent.getStringExtra("name")
 
 
         Info.setOnClickListener{
@@ -70,6 +83,11 @@ class HomeActivity : AppCompatActivity() {
         val intent: Intent = Intent(this,IngresosActivity::class.java)
         startActivity(intent)
     }
+
+    fun CambiarEstado(estado: IEstado){
+        state = estado
+    }
+
     fun InfoG(){
         val intent: Intent = Intent(this,ProgresoActivity::class.java)
         startActivity(intent)
@@ -143,7 +161,14 @@ class HomeActivity : AppCompatActivity() {
         val t=texto.split("\n")
         val p=(t.size)-2
         //println(t[p].split(","))
-        return t[p].split(",")
+        try {
+            return t[p].split(",")
+        }
+        catch (e: Exception){
+            var list= listOf<String>("0","1")
+            return list
+        }
+
 
     }
    /* fun color(porcen:Float) {

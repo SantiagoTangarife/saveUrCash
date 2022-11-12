@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/USER/StudioProjects/saveUrCash/app/src/main/res/layout/activity_ahorro_programado.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/USER/StudioProjects/saveUrCash/app/src/main/res/layout/activity_home.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/USER/StudioProjects/saveUrCash/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/USER/StudioProjects/saveUrCash/app/src/main/res/layout/activity_pagos.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/USER/StudioProjects/saveUrCash/app/src/main/res/layout/activity_prestamo_add.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/USER/StudioProjects/saveUrCash/app/src/main/res/layout/activity_prestamos.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/USER/StudioProjects/saveUrCash/app/src/main/res/layout/activity_progreso.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/saxss/AndroidStudioProjects/saveUr/app/src/main/res/layout/activity_ahorro_programado.xml" value="0.33" />
         <entry key="..\:/Users/saxss/AndroidStudioProjects/saveUr/app/src/main/res/layout/activity_egresos.xml" value="0.12" />
         <entry key="..\:/Users/saxss/AndroidStudioProjects/saveUr/app/src/main/res/layout/activity_factura_add.xml" value="0.25" />
@@ -20,7 +27,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
