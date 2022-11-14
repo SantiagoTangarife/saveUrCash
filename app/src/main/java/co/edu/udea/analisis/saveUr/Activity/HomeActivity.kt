@@ -1,18 +1,14 @@
-package co.edu.udea.analisis.saveUr
+package co.edu.udea.analisis.saveUr.Activity
 
-import android.animation.ObjectAnimator
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_home.*
+import co.edu.udea.analisis.saveUr.*
 import java.io.*
 import java.text.NumberFormat
 import kotlin.math.abs
-import co.edu.udea.analisis.saveUr.Estado
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.item_factura.view.*
 
 
 //package co.edu.udea.analisis.saveUr.data
@@ -41,7 +37,7 @@ class HomeActivity : AppCompatActivity() {
 
         val formatoNumero: NumberFormat = NumberFormat.getNumberInstance()
         val money=GenerarInfo()
-        val registrosInEg=Dinero().RegistroMes(money)
+        val registrosInEg= Dinero().RegistroMes(money)
         state.balance(registrosInEg,findViewById(R.id.progressBar2),CargarDbAh())
         state.color(findViewById(R.id.progressBar2))
         gastado.text = "$${formatoNumero.format(abs(registrosInEg[1]))}"
@@ -67,20 +63,20 @@ class HomeActivity : AppCompatActivity() {
             Egreso()
         }
         AhorroP.setOnClickListener{
-            val intent: Intent = Intent(this,AhorroProgramadoActivity::class.java)
+            val intent: Intent = Intent(this, AhorroProgramadoActivity::class.java)
             startActivity(intent)}
         Factura.setOnClickListener{
-            val intent: Intent = Intent(this,FacturasMesActivity::class.java)
+            val intent: Intent = Intent(this, FacturasMesActivity::class.java)
             startActivity(intent)
         }
         Prestamos.setOnClickListener{
-            val intent: Intent = Intent(this,PrestamosActivity::class.java)
+            val intent: Intent = Intent(this, PrestamosActivity::class.java)
             startActivity(intent)
         }
     }
 
     fun Ingreso() {           //funcion OnClickIngresos
-        val intent: Intent = Intent(this,IngresosActivity::class.java)
+        val intent: Intent = Intent(this, IngresosActivity::class.java)
         startActivity(intent)
     }
 
@@ -89,11 +85,11 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun InfoG(){
-        val intent: Intent = Intent(this,ProgresoActivity::class.java)
+        val intent: Intent = Intent(this, ProgresoActivity::class.java)
         startActivity(intent)
     }
     fun Egreso(){
-        val intent: Intent = Intent(this,EgresosActivity::class.java)
+        val intent: Intent = Intent(this, EgresosActivity::class.java)
         startActivity(intent)
     }
     fun Guardar(texto: String) {//texto= carne;30/07/22;-23000

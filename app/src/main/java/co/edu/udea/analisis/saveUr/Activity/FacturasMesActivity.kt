@@ -1,14 +1,15 @@
-package co.edu.udea.analisis.saveUr
+package co.edu.udea.analisis.saveUr.Activity
 
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
+import co.edu.udea.analisis.saveUr.Adapter.FacturasAdapter
+import co.edu.udea.analisis.saveUr.Factura
+import co.edu.udea.analisis.saveUr.R
 import kotlinx.android.synthetic.main.activity_facturas_mes.*
-import kotlinx.android.synthetic.main.activity_progreso.*
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileInputStream
@@ -23,7 +24,7 @@ class FacturasMesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_facturas_mes)
         val add:ImageView=findViewById(R.id.add)
         add.setOnClickListener{
-            val intent: Intent = Intent(this,FacturaAddActivity::class.java)
+            val intent: Intent = Intent(this, FacturaAddActivity::class.java)
             startActivity(intent)
         }
 
@@ -33,10 +34,10 @@ class FacturasMesActivity : AppCompatActivity() {
 
         val listaFacturas= GenerarLista()
         if(listaFacturas.size==0){
-            val factura=Factura("----","-- de cada mes","---","-1",R.drawable.egreso)
+            val factura= Factura("----","-- de cada mes","---","-1", R.drawable.egreso)
             listaFacturas.add(factura)
         }
-        val adapter=FacturasAdapter(this,listaFacturas)
+        val adapter= FacturasAdapter(this,listaFacturas)
         listaF.adapter=adapter
 
 
@@ -84,7 +85,7 @@ class FacturasMesActivity : AppCompatActivity() {
                 if(t[2]!="00"){
                     k=t[2]
                 }
-                val factura=Factura(t[0],"${t[1]} de cada mes",k,c,R.drawable.egreso)
+                val factura= Factura(t[0],"${t[1]} de cada mes",k,c, R.drawable.egreso)
                 money.add(factura)}
         }
         return money

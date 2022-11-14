@@ -17,37 +17,37 @@
         android:theme="@style/Theme.SaveUr"
         tools:targetApi="31">
         <activity
-            android:name=".PrestamosActivity"
+            android:name=".Activity.PrestamosActivity"
             android:exported="false" />
         <activity
-            android:name=".PrestamoAddActivity"
+            android:name=".Activity.PrestamoAddActivity"
             android:exported="false" />
         <activity
-            android:name=".PagosActivity"
+            android:name=".Activity.PagosActivity"
             android:exported="false" />
         <activity
-            android:name=".FacturaAddActivity"
+            android:name=".Activity.FacturaAddActivity"
             android:exported="false" />
         <activity
-            android:name=".FacturasMesActivity"
+            android:name=".Activity.FacturasMesActivity"
             android:exported="false" />
         <activity
-            android:name=".AhorroProgramadoActivity"
+            android:name=".Activity.AhorroProgramadoActivity"
             android:exported="false" />
         <activity
-            android:name=".ProgresoActivity"
+            android:name=".Activity.ProgresoActivity"
             android:exported="false" />
         <activity
-            android:name=".EgresosActivity"
+            android:name=".Activity.EgresosActivity"
             android:exported="false" />
         <activity
-            android:name=".IngresosActivity"
+            android:name=".Activity.IngresosActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".Activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

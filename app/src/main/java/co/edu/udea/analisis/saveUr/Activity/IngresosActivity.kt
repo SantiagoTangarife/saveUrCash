@@ -1,4 +1,4 @@
-package co.edu.udea.analisis.saveUr
+package co.edu.udea.analisis.saveUr.Activity
 
 import android.content.Intent
 import android.os.Build
@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import co.edu.udea.analisis.saveUr.R
 import java.io.File
 import java.time.LocalDate
 
@@ -38,7 +39,7 @@ class IngresosActivity : AppCompatActivity() {
         }
     }
     fun backHome(){
-        val intent: Intent = Intent(this,HomeActivity::class.java)
+        val intent: Intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }
     fun Guardar(texto: String) {//texto= Pago;30/07/22;23000

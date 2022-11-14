@@ -1,13 +1,8 @@
 package co.edu.udea.analisis.saveUr
 
 import android.animation.ObjectAnimator
-import android.graphics.Color
 import android.widget.ProgressBar
-import kotlinx.android.synthetic.main.activity_home.*
-import java.io.BufferedReader
-import java.io.File
-import java.io.FileInputStream
-import java.io.InputStreamReader
+import co.edu.udea.analisis.saveUr.Activity.HomeActivity
 import kotlin.math.abs
 
 abstract class Estado(context: HomeActivity): IEstado {

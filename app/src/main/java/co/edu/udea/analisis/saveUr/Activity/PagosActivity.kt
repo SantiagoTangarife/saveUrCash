@@ -1,11 +1,12 @@
-package co.edu.udea.analisis.saveUr
+package co.edu.udea.analisis.saveUr.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
-import kotlinx.android.synthetic.main.activity_facturas_mes.*
+import co.edu.udea.analisis.saveUr.Adapter.PagosAdapter
+import co.edu.udea.analisis.saveUr.Pago
+import co.edu.udea.analisis.saveUr.R
 import kotlinx.android.synthetic.main.activity_pagos.*
 import java.io.BufferedReader
 import java.io.File
@@ -21,15 +22,15 @@ class PagosActivity : AppCompatActivity() {
         //val factura=Factura("Arriendo","${25} de cada mes",650F,-1,R.drawable.egreso)
         //val factura2=Factura("Pago","${15} de cada mes", 650F,-1,R.drawable.egreso)
         back.setOnClickListener{
-            val intent: Intent = Intent(this,PrestamosActivity::class.java)
+            val intent: Intent = Intent(this, PrestamosActivity::class.java)
             startActivity(intent)
         }
         val listaDeudores= GenerarLista()
         if(listaDeudores.size==0){
-            val pago=Pago("----")
+            val pago= Pago("----")
             listaDeudores.add(pago)
         }
-        val adapter=PagosAdapter(this,listaDeudores)
+        val adapter= PagosAdapter(this,listaDeudores)
         listP.adapter=adapter
 
 
@@ -69,7 +70,7 @@ class PagosActivity : AppCompatActivity() {
                 val t=i.split(";")
                 //println(t)   //0=titulo, 1 =cantidad Prestada;
 
-                val pago=Pago("${t[0]}\n     $${t[1]}")
+                val pago= Pago("${t[0]}\n     $${t[1]}")
                 money.add(pago)}
         }
         return money

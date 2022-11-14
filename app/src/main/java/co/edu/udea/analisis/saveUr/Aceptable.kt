@@ -2,6 +2,7 @@ package co.edu.udea.analisis.saveUr
 
 import android.graphics.Color
 import android.widget.ProgressBar
+import co.edu.udea.analisis.saveUr.Activity.HomeActivity
 
 class Aceptable(context: HomeActivity) : Estado(context) {
     override var contexto: HomeActivity = context

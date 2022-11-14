@@ -1,21 +1,18 @@
-package co.edu.udea.analisis.saveUr
+package co.edu.udea.analisis.saveUr.Activity
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.View.FOCUSABLES_TOUCH_MODE
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
+import co.edu.udea.analisis.saveUr.R
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStreamReader
-import java.util.*
-import kotlin.collections.ArrayList
 
 class AhorroProgramadoActivity : AppCompatActivity() {
 
@@ -39,7 +36,7 @@ class AhorroProgramadoActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.FechasProgramadas).hint="${inicio[1]}"            //cuotas
         buttonSA.setOnClickListener{
             modificarAhorro()
-            val intent: Intent = Intent(this,HomeActivity::class.java)
+            val intent: Intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }               ////CLICK EN E BOTON GUARDAR
     }

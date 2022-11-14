@@ -1,4 +1,4 @@
-package co.edu.udea.analisis.saveUr
+package co.edu.udea.analisis.saveUr.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
+import co.edu.udea.analisis.saveUr.R
 import java.io.File
 
 class PrestamoAddActivity : AppCompatActivity() {
@@ -18,11 +19,11 @@ class PrestamoAddActivity : AppCompatActivity() {
         save.setOnClickListener{
             //guardar contenidos
             Recorrido()
-            val intent: Intent = Intent(this,HomeActivity::class.java)
+            val intent: Intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
         back.setOnClickListener{
-            val intent: Intent = Intent(this,PrestamosActivity::class.java)
+            val intent: Intent = Intent(this, PrestamosActivity::class.java)
             startActivity(intent)
         }
 

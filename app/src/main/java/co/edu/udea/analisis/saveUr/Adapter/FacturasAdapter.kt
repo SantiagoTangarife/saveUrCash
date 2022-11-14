@@ -1,12 +1,13 @@
-package co.edu.udea.analisis.saveUr
+package co.edu.udea.analisis.saveUr.Adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import co.edu.udea.analisis.saveUr.Factura
+import co.edu.udea.analisis.saveUr.R
 import kotlinx.android.synthetic.main.item_factura.view.*
-import kotlinx.android.synthetic.main.item_producto.view.*
 
 class FacturasAdapter(private val mContext:Context,private val ListaFacturas:List<Factura> ):ArrayAdapter<Factura>(mContext,0,ListaFacturas) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

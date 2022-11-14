@@ -1,4 +1,4 @@
-package co.edu.udea.analisis.saveUr
+package co.edu.udea.analisis.saveUr.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import co.edu.udea.analisis.saveUr.R
 import java.io.File
 
 class FacturaAddActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class FacturaAddActivity : AppCompatActivity() {
             val info=concat()
             println(info)
             addFactura(info)
-            val intent: Intent = Intent(this,FacturasMesActivity::class.java)
+            val intent: Intent = Intent(this, FacturasMesActivity::class.java)
             startActivity(intent)
         }
 
