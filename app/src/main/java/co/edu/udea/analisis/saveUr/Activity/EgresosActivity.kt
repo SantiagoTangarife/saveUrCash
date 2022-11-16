@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
+import co.edu.udea.analisis.saveUr.Egreso
+import co.edu.udea.analisis.saveUr.Fachada
 import co.edu.udea.analisis.saveUr.R
-import java.io.File
+import co.edu.udea.analisis.saveUr.StrategiesGuardar.EgresoSaver
+import co.edu.udea.analisis.saveUr.StrategiesGuardar.TransaccionSaver
 import java.time.LocalDate
 
 class EgresosActivity : AppCompatActivity() {
@@ -18,23 +20,26 @@ class EgresosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_egresos)
+        //val transaccionS: TransaccionSaver = TransaccionSaver(EgresoSaver())
         val buttonE: ImageButton = findViewById(R.id.backToHomeE)
         val buttonSave: Button = findViewById(R.id.SaveEgreso)
+        val fachada = Fachada.getInstancia()
+
         buttonE.setOnClickListener {
             backHome()
         }
         buttonSave.setOnClickListener {
             val Titulo = findViewById<TextView>(R.id.IdTituloEgreso)
             val Valor = findViewById<TextView>(R.id.IdValorEgreso)
-
-            val valor:String=Valor.text.toString()
-            val valor1:Float= valor.toFloat()
+            val valor1:Float= Valor.text.toString().toFloat() * -1
             val date = LocalDate.now()
-            println(date)
+            val rutaSD = baseContext.getExternalFilesDir(null)?.absolutePath
+
+            val egreso = Egreso(Titulo.text.toString(),valor1,R.drawable.egreso,date.toString())
             //ESCRIBO EL NUEVO DATO EN EL ARCHIVO
-            val outString="${Titulo.text.toString()};${date};${valor1*-1}"
-            println(outString)
-            Guardar(outString)
+
+            fachada.guardarEgreso(egreso, rutaSD)
+            //transaccionS.guardarEgreso(egreso, rutaSD)
             backHome()
         }
     }
@@ -42,7 +47,8 @@ class EgresosActivity : AppCompatActivity() {
         val intent: Intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }
-    fun Guardar(texto: String) {//texto= carne;30/07/22;-23000
+    /*fun Guardar(transaccion: Transaccion) {//texto= carne;30/07/22;-23000
+        val outString= transaccion.toString()
         try {
             val rutaSD = baseContext.getExternalFilesDir(null)?.absolutePath
             val miCarpeta = File(rutaSD, "datos")
@@ -50,8 +56,8 @@ class EgresosActivity : AppCompatActivity() {
                 miCarpeta.mkdir()
             }
             val ficheroFisico = File(miCarpeta, "datos.txt")
-            ficheroFisico.appendText("$texto\n")
-            println(texto)
+            ficheroFisico.appendText("$outString\n")
+
 
         }
         catch (e: Exception) {
@@ -59,5 +65,5 @@ class EgresosActivity : AppCompatActivity() {
                 "No se ha podido guardar",
                 Toast.LENGTH_LONG).show()
         }
-    }
+    }*/
 }

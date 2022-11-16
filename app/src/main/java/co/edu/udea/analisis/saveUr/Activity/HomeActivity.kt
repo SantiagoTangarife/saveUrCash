@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import co.edu.udea.analisis.saveUr.*
+import co.edu.udea.analisis.saveUr.States.Grave
+import co.edu.udea.analisis.saveUr.States.Normal
 import java.io.*
 import java.text.NumberFormat
 import kotlin.math.abs
@@ -16,11 +18,11 @@ import com.google.firebase.auth.FirebaseAuth
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var auth : FirebaseAuth
-    var estadoNormal: IEstado = Normal(this)
+    /*var estadoNormal: IEstado = Normal(this)
     var estadoAceptable: IEstado = Aceptable(this)
     var estadoGrave: IEstado = Grave(this)
     var estadocritico: IEstado = Critico(this)
-    var state: IEstado = estadoNormal
+    var state: IEstado = estadoNormal*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,15 +33,16 @@ class HomeActivity : AppCompatActivity() {
         val Info:LinearLayout=findViewById(R.id.InfoG)
         val buttonI: Button = findViewById(R.id.Ingresos)
         val buttonE:Button=findViewById(R.id.Egresos)
-        val AhorroP:Button=findViewById(R.id.AhorroProg)
         val Factura:Button=findViewById(R.id.Facturas)
         val Prestamos:Button=findViewById(R.id.Prestamos)
 
         val formatoNumero: NumberFormat = NumberFormat.getNumberInstance()
         val money=GenerarInfo()
         val registrosInEg= Dinero().RegistroMes(money)
-        state.balance(registrosInEg,findViewById(R.id.progressBar2),CargarDbAh())
-        state.color(findViewById(R.id.progressBar2))
+
+        val fachada: Fachada = Fachada.getInstancia()
+        fachada.ActualizarBarra(registrosInEg,findViewById(R.id.progressBar2),CargarDbAh())
+
         gastado.text = "$${formatoNumero.format(abs(registrosInEg[1]))}"
         total.text = "$${formatoNumero.format(registrosInEg[0])}"
         auth = FirebaseAuth.getInstance()
@@ -57,14 +60,12 @@ class HomeActivity : AppCompatActivity() {
             InfoG()
         }
         buttonI.setOnClickListener {
-        Ingreso()
-    }
+            Ingreso()
+        }
         buttonE.setOnClickListener {
             Egreso()
         }
-        AhorroP.setOnClickListener{
-            val intent: Intent = Intent(this, AhorroProgramadoActivity::class.java)
-            startActivity(intent)}
+
         Factura.setOnClickListener{
             val intent: Intent = Intent(this, FacturasMesActivity::class.java)
             startActivity(intent)
@@ -80,9 +81,9 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun CambiarEstado(estado: IEstado){
+    /*fun CambiarEstado(estado: IEstado){
         state = estado
-    }
+    }*/
 
     fun InfoG(){
         val intent: Intent = Intent(this, ProgresoActivity::class.java)
@@ -92,24 +93,7 @@ class HomeActivity : AppCompatActivity() {
         val intent: Intent = Intent(this, EgresosActivity::class.java)
         startActivity(intent)
     }
-    fun Guardar(texto: String) {//texto= carne;30/07/22;-23000
-        try {
-            val rutaSD = baseContext.getExternalFilesDir(null)?.absolutePath
-            val miCarpeta = File(rutaSD, "datos")
-            if (!miCarpeta.exists()) {
-                miCarpeta.mkdir()
-            }
-            val ficheroFisico = File(miCarpeta, "datos.txt")
-            ficheroFisico.appendText("$texto\n")
 
-
-        }
-        catch (e: Exception) {
-            Toast.makeText(this,
-                "No se ha podido guardar",
-                Toast.LENGTH_LONG).show()
-        }
-    }
     fun Cargar() : String {
         var texto = ""
         try {

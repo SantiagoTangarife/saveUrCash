@@ -10,7 +10,8 @@ import co.edu.udea.analisis.saveUr.R
 
 import kotlinx.android.synthetic.main.item_producto.view.*
 
-class ElementosAdapter(private val mContext:Context,private val ListaElementos:List<Elemento>):ArrayAdapter<Elemento>(mContext,0,ListaElementos) {
+class ElementosAdapter(private val mContext:Context,private val ListaElementos:List<Elemento>)
+    :ArrayAdapter<Elemento>(mContext,0,ListaElementos) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val layout= LayoutInflater.from(mContext).inflate(R.layout.item_producto,parent,false)
 

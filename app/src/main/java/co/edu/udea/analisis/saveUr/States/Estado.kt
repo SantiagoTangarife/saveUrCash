@@ -1,12 +1,14 @@
-package co.edu.udea.analisis.saveUr
+package co.edu.udea.analisis.saveUr.States
 
 import android.animation.ObjectAnimator
 import android.widget.ProgressBar
 import co.edu.udea.analisis.saveUr.Activity.HomeActivity
+import co.edu.udea.analisis.saveUr.Fachada
+import co.edu.udea.analisis.saveUr.Interfaces.IEstado
 import kotlin.math.abs
 
-abstract class Estado(context: HomeActivity): IEstado {
-    protected open val contexto: HomeActivity = context
+abstract class Estado(context: Fachada): IEstado {
+    protected open val contexto: Fachada = context
 
     override fun balance(InEg: ArrayList<Float>, progressBar2: ProgressBar, CargarDbAh:List<String>) {
         val cuota=CargarDbAh

@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import co.edu.udea.analisis.saveUr.Adapter.PagosAdapter
+import co.edu.udea.analisis.saveUr.Fachada
 import co.edu.udea.analisis.saveUr.Pago
 import co.edu.udea.analisis.saveUr.R
+import co.edu.udea.analisis.saveUr.StrategiesCarga.PagosLoader
+import co.edu.udea.analisis.saveUr.StrategiesCarga.TransaccionLoader
 import kotlinx.android.synthetic.main.activity_pagos.*
 import java.io.BufferedReader
 import java.io.File
@@ -19,15 +22,20 @@ class PagosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pagos)
         val back:ImageButton=findViewById(R.id.backP1)
+        //val transaccionLoader: TransaccionLoader = TransaccionLoader(PagosLoader())
+        val fachada = Fachada.getInstancia()
         //val factura=Factura("Arriendo","${25} de cada mes",650F,-1,R.drawable.egreso)
         //val factura2=Factura("Pago","${15} de cada mes", 650F,-1,R.drawable.egreso)
         back.setOnClickListener{
             val intent: Intent = Intent(this, PrestamosActivity::class.java)
             startActivity(intent)
         }
-        val listaDeudores= GenerarLista()
+        val rutaSD = baseContext.getExternalFilesDir(null)?.absolutePath
+
+        val listaDeudores= fachada.cargarPagos(rutaSD)//transaccionLoader.cargarPagos(rutaSD)
+
         if(listaDeudores.size==0){
-            val pago= Pago("----")
+            val pago= Pago("----", "----", "----", "0")
             listaDeudores.add(pago)
         }
         val adapter= PagosAdapter(this,listaDeudores)
@@ -36,6 +44,7 @@ class PagosActivity : AppCompatActivity() {
 
     }
 
+    /*
     fun CargarP() : List<String> {
         var texto = ""
         try {
@@ -70,9 +79,9 @@ class PagosActivity : AppCompatActivity() {
                 val t=i.split(";")
                 //println(t)   //0=titulo, 1 =cantidad Prestada;
 
-                val pago= Pago("${t[0]}\n     $${t[1]}")
+                val pago= Pago("${t[0]}\n     $${t[1]}", "----", "----", "----")
                 money.add(pago)}
         }
         return money
-    }
+    }*/
 }

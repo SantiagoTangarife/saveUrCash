@@ -143,13 +143,13 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/AhorroProg"
-                android:layout_width="199dp"
-                android:layout_height="125dp"
-                android:backgroundTint="#FFF503"
-                android:drawableTop="@drawable/savemoney"
+                android:id="@+id/Facturas"
+                android:layout_width="wrap_content"
+                android:layout_height="263dp"
+                android:backgroundTint="#22B14C"
+                android:drawableTop="@drawable/factura"
 
-                android:text="Ahorro Programado"
+                android:text="Facturas"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -159,31 +159,9 @@
                 android:layout_height="125dp" />
 
             <Button
-                android:id="@+id/Facturas"
-                android:layout_width="179dp"
-                android:layout_height="match_parent"
-                android:backgroundTint="#22B14C"
-                android:drawableTop="@drawable/factura"
-
-                android:text="Facturas"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
                 android:id="@+id/Extracto"
-                android:layout_width="185dp"
-                android:layout_height="125dp"
+                android:layout_width="wrap_content"
+                android:layout_height="260dp"
                 android:backgroundTint="#025B85"
                 android:drawableTop="@drawable/dinero"
 
@@ -196,8 +174,8 @@
 
             <Button
                 android:id="@+id/Prestamos"
-                android:layout_width="199dp"
-                android:layout_height="125dp"
+                android:layout_width="match_parent"
+                android:layout_height="265dp"
                 android:backgroundTint="#7F7F7F"
                 android:drawableTop="@drawable/prestamo"
 
@@ -207,9 +185,6 @@
                 android:textStyle="bold" />
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="16dp" />
     </TableLayout>
 
     <Button

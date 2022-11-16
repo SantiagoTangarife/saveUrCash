@@ -7,14 +7,12 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import co.edu.udea.analisis.saveUr.Adapter.FacturasAdapter
+import co.edu.udea.analisis.saveUr.Fachada
 import co.edu.udea.analisis.saveUr.Factura
 import co.edu.udea.analisis.saveUr.R
+import co.edu.udea.analisis.saveUr.StrategiesCarga.FacturaLoader
+import co.edu.udea.analisis.saveUr.StrategiesCarga.TransaccionLoader
 import kotlinx.android.synthetic.main.activity_facturas_mes.*
-import java.io.BufferedReader
-import java.io.File
-import java.io.FileInputStream
-import java.io.InputStreamReader
-import java.util.ArrayList
 
 
 class FacturasMesActivity : AppCompatActivity() {
@@ -23,6 +21,9 @@ class FacturasMesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_facturas_mes)
         val add:ImageView=findViewById(R.id.add)
+        //val transaccionLoader: TransaccionLoader = TransaccionLoader(FacturaLoader())
+        val fachada = Fachada.getInstancia()
+
         add.setOnClickListener{
             val intent: Intent = Intent(this, FacturaAddActivity::class.java)
             startActivity(intent)
@@ -32,17 +33,18 @@ class FacturasMesActivity : AppCompatActivity() {
         //val factura=Factura("Arriendo","${25} de cada mes",650F,-1,R.drawable.egreso)
         //val factura2=Factura("Pago","${15} de cada mes", 650F,-1,R.drawable.egreso)
 
-        val listaFacturas= GenerarLista()
+        val rutaSD = baseContext.getExternalFilesDir(null)?.absolutePath
+        val listaFacturas  = fachada.cargarFacturas(rutaSD) //transaccionLoader.cargarFacturas(rutaSD)
         if(listaFacturas.size==0){
-            val factura= Factura("----","-- de cada mes","---","-1", R.drawable.egreso)
+            val factura= Factura("----","-- de cada mes","0","-1", R.drawable.egreso)
             listaFacturas.add(factura)
         }
-        val adapter= FacturasAdapter(this,listaFacturas)
+        val adapter= FacturasAdapter(this, listaFacturas)
         listaF.adapter=adapter
 
 
     }
-
+/*
     fun CargarF() : List<String> {
         var texto = ""
         try {
@@ -91,6 +93,6 @@ class FacturasMesActivity : AppCompatActivity() {
         return money
     }
 
-
+*/
 
 }

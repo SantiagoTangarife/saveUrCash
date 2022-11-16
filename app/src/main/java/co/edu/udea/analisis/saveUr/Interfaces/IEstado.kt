@@ -1,4 +1,4 @@
-package co.edu.udea.analisis.saveUr
+package co.edu.udea.analisis.saveUr.Interfaces
 
 import android.graphics.Color
 import android.widget.ProgressBar

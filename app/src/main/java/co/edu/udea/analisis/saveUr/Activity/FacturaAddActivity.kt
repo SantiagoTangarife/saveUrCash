@@ -5,26 +5,39 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
+import co.edu.udea.analisis.saveUr.Fachada
+import co.edu.udea.analisis.saveUr.Factura
 import co.edu.udea.analisis.saveUr.R
-import java.io.File
+import co.edu.udea.analisis.saveUr.StrategiesGuardar.FacturaSaver
+import co.edu.udea.analisis.saveUr.StrategiesGuardar.TransaccionSaver
 
 class FacturaAddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_factura_add)
+        //val transaccionS: TransaccionSaver = TransaccionSaver(FacturaSaver())
         val add:Button=findViewById(R.id.addF)
+        val fachada = Fachada.getInstancia()
+
         add.setOnClickListener{
-            val info=concat()
-            println(info)
-            addFactura(info)
+            val titulo:String=findViewById<EditText>(R.id.TituloF).text.toString()
+            val dia:String=findViewById<EditText>(R.id.DiaF).text.toString()
+            val valor:String=findViewById<EditText>(R.id.ValorF).text.toString()
+            val cuotas:String=findViewById<EditText>(R.id.CuotasF).text.toString()
+            val factura = Factura(titulo,dia,valor,cuotas,R.drawable.egreso)
+            val rutaSD = baseContext.getExternalFilesDir(null)?.absolutePath
+
+            fachada.guardarFactura(factura,rutaSD)
+            //transaccionS.guardarFactura(factura,rutaSD)
             val intent: Intent = Intent(this, FacturasMesActivity::class.java)
             startActivity(intent)
         }
 
     }
 
-    fun addFactura(texto: String) {//texto= arriendo;25;00;-1
+    /*fun addFactura(factura: Factura) {//texto= arriendo;25;00;-1
+        val outString= factura.toString()
+
         try {
             val rutaSD = baseContext.getExternalFilesDir(null)?.absolutePath
             val miCarpeta = File(rutaSD, "facturas")
@@ -32,7 +45,7 @@ class FacturaAddActivity : AppCompatActivity() {
                 miCarpeta.mkdir()
             }
             val ficheroFisico = File(miCarpeta, "facturas.txt")
-            ficheroFisico.appendText("$texto\n")
+            ficheroFisico.appendText("$outString\n")
 
 
         }
@@ -41,13 +54,5 @@ class FacturaAddActivity : AppCompatActivity() {
                 "No se ha podido guardar",
                 Toast.LENGTH_LONG).show()
         }
-    }
-    fun concat(): String {
-        val titulo:String=findViewById<EditText>(R.id.TituloF).text.toString()
-        val dia:String=findViewById<EditText>(R.id.DiaF).text.toString()
-        val valor:String=findViewById<EditText>(R.id.ValorF).text.toString()
-        val cuotas:String=findViewById<EditText>(R.id.CuotasF).text.toString()
-        val concatenar="${titulo};${dia};${valor};${cuotas}"
-        return concatenar
-    }
+    }*/
 }
